@@ -22,7 +22,8 @@ Using IIS to host:
   5) Make a new website and select a port.
   4) point to folder [Path]/PersonalWebSite\dist\PersonalWebSite\browser
   5) After configuring ISS website, point to [Path]/PersonalWebSite\dist\PersonalWebSite\browser
-  6) Access the localhost:[port], to see the site.
+  6) Make sure url-rewrite is download for IIS, so it knows how to forward pages to proper routes. https://www.iis.net/downloads/microsoft/url-rewrite
+  7) Access the localhost:[port], to see the site.
 
 Resoning to host website using IIS, is I want to use .net for backend on another port, [REPO: DotNetService].
 Another port for [REPO: PythonApiService], where .net can commicate to it for heavy lifting of AI procedures and python libraries.
