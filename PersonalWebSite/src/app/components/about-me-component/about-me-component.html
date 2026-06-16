@@ -1,0 +1,83 @@
+<!-- Main Application Container -->
+<div class="dashboard-viewport">
+  
+  <!-- Left Side System Panel (Fixed/Sticky Sidebar) -->
+  <aside class="system-sidebar">
+    <div class="sidebar-sticky-content">
+      <div class="identity-card">
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          <span class="status-text">SYSTEMS_ACTIVE // 2026</span>
+        </div>
+        <h1 class="dev-name">{{ name }}</h1>
+        <p class="dev-title">{{ title }}</p>
+        <p class="dev-location">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          {{ location }}
+        </p>
+      </div>
+
+      <!-- Secure Control Node (Login Button Redirect) -->
+      <div class="gateway-node">
+        <a routerLink="/login" class="btn-modern-gateway">
+          <span class="btn-text">Initialize Identity Gateway</span>
+          <span class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path><polyline points="10 17 15 12 10 7"></polyline><line x1="15" y1="12" x2="3" y2="12"></line></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Right Side Interactive Grid Layer (Scrollable Deck) -->
+  <main class="dashboard-deck">
+    
+    <!-- Profile Executive Summary Card -->
+    <section class="deck-card summary-card">
+      <div class="card-header">
+        <div class="window-controls">
+          <span class="w-dot close"></span><span class="w-dot minimize"></span><span class="w-dot maximize"></span>
+        </div>
+        <span class="card-tag">exec_summary.log</span>
+      </div>
+      <div class="card-body">
+        <p class="summary-paragraph">{{ summary }}</p>
+      </div>
+    </section>
+
+    <!-- Metrics Matrix Grid -->
+    <section class="metrics-container-grid">
+      <div class="metric-glass-card" *ngFor="let item of metrics">
+        <div class="card-glow"></div>
+        <div class="metric-header">
+          <span class="metric-value">{{ item.value }}</span>
+          <span class="metric-label">{{ item.metric }}</span>
+        </div>
+        <p class="metric-details">{{ item.description }}</p>
+      </div>
+    </section>
+
+    <!-- Systems Capability Grid -->
+    <section class="deck-card capabilities-card">
+      <div class="card-header">
+        <div class="window-controls">
+          <span class="w-dot close"></span><span class="w-dot minimize"></span><span class="w-dot maximize"></span>
+        </div>
+        <span class="card-tag">engine_capabilities.config</span>
+      </div>
+      <div class="card-body">
+        <div class="skills-flex-matrix">
+          <div class="capability-node" *ngFor="let group of skillInventory">
+            <h3 class="node-title">{{ group.category }}</h3>
+            <div class="pill-cloud">
+              <span class="tech-pill" *ngFor="let skill of group.skills">
+                <span class="pill-decorator">&lt;/&gt;</span> {{ skill }}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>

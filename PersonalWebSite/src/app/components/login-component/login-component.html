@@ -1,0 +1,89 @@
+<!-- Main Application Container mirroring the Dashboard layout -->
+<div class="dashboard-viewport">
+  
+  <!-- Left Side System Panel (Fixed/Sticky Sidebar) -->
+  <aside class="system-sidebar">
+    <div class="sidebar-sticky-content">
+      <div class="identity-card">
+        <div class="status-indicator">
+          <span class="pulse-dot security-pulse"></span>
+          <span class="status-text security-text">AUTH_GATEWAY // LOCKED</span>
+        </div>
+        <h1 class="dev-name">Control Panel</h1>
+        <p class="dev-title">Elevated administrative privileges are required to modify node infrastructure.</p>
+        <p class="dev-location">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          SECURE_SSL_LAYER
+        </p>
+      </div>
+
+      <!-- Secure Control Node (Abort and Return Redirect) -->
+      <div class="gateway-node">
+        <a routerLink="/" class="btn-modern-gateway btn-abort">
+          <span class="btn-text">Abort & Return to Root</span>
+          <span class="btn-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Right Side Interactive Form Layer -->
+  <main class="dashboard-deck auth-deck">
+    
+    <!-- Cryptographic Credentials Input Card -->
+    <section class="deck-card login-card">
+      <div class="card-header">
+        <div class="window-controls">
+          <span class="w-dot close"></span><span class="w-dot minimize"></span><span class="w-dot maximize"></span>
+        </div>
+        <span class="card-tag">identity_challenge.sh</span>
+      </div>
+      
+      <div class="card-body">
+        <form (submit)="onExecutionSubmit($event)" class="secure-matrix-form">
+          
+          <div class="form-input-node">
+            <label for="identity">
+              <span class="label-decorator">&gt;</span> Username / Operator Email
+            </label>
+            <div class="input-glass-container">
+              <input type="text" id="identity" required placeholder="operator@domain.com" autocomplete="off" />
+              <div class="input-focus-glow"></div>
+            </div>
+          </div>
+
+          <div class="form-input-node">
+            <label for="credentials">
+              <span class="label-decorator">&gt;</span> Security Access Key
+            </label>
+            <div class="input-glass-container">
+              <input type="password" id="credentials" required placeholder="••••••••••••" />
+              <div class="input-focus-glow"></div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-execute-auth">
+              <span class="btn-glow-layer"></span>
+              Execute Authentication Challenge
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- System Security Notice Terminal Block -->
+    <section class="deck-card notice-card">
+      <div class="card-header">
+        <span class="card-tag">security_policy.txt</span>
+      </div>
+      <div class="card-body console-text">
+        <p><strong>[NOTICE]</strong> All access validation requests are processed through secure state machines. Unauthorized handshake requests will automatically cycle the node environment and drop connection pipelines.</p>
+      </div>
+    </section>
+
+  </main>
+</div>

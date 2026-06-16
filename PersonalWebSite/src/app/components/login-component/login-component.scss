@@ -1,0 +1,287 @@
+// Reusing exact same dashboard architectural theme layout tokens
+$bg-main: #060913;
+$bg-surface: #0E1326;
+$bg-glass: rgba(14, 19, 38, 0.7);
+$accent-neon-cyan: #00f0ff;
+$accent-magenta-warn: #f43f5e;
+$text-primary: #f8fafc;
+$text-secondary: #cbd5e1;
+$text-dim: #64748b;
+$border-glass: rgba(36, 50, 79, 0.5);
+
+.dashboard-viewport {
+  background-color: $bg-main;
+  color: $text-primary;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  font-family: 'SF Pro Display', -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Left Sidebar Blueprint
+.system-sidebar {
+  background: linear-gradient(180deg, #0a0e1e 0%, #05070f 100%);
+  border-right: 1px solid $border-glass;
+  padding: 60px 40px;
+
+  .sidebar-sticky-content {
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+
+    .pulse-dot.security-pulse {
+      width: 8px;
+      height: 8px;
+      background-color: $accent-magenta-warn;
+      border-radius: 50%;
+      box-shadow: 0 0 12px $accent-magenta-warn;
+      animation: pulseSecurity 2s infinite;
+    }
+    .status-text.security-text {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: $accent-magenta-warn;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  .dev-name {
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin: 0 0 10px 0;
+    background: linear-gradient(135deg, #ffffff 30%, #f43f5e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .dev-title {
+    color: $text-secondary;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+  }
+
+  .dev-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: $text-dim;
+    font-size: 0.9rem;
+    font-family: monospace;
+  }
+
+  .btn-modern-gateway {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid $border-glass;
+    color: $text-primary;
+    text-decoration: none;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:hover {
+      border-color: $text-secondary;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+      
+      .btn-icon {
+        color: white;
+        transform: translateX(-4px);
+      }
+    }
+
+    .btn-icon {
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+      color: $text-dim;
+    }
+  }
+}
+
+// Right Interface Deck Blueprint
+.dashboard-deck.auth-deck {
+  padding: 60px 80px;
+  max-width: 800px; // Centered narrower layout for the credential nodes
+  align-self: center;
+
+  @media (max-width: 960px) {
+    padding: 40px 20px;
+    width: 100%;
+  }
+
+  .deck-card {
+    background: $bg-glass;
+    backdrop-filter: blur(20px);
+    border: 1px solid $border-glass;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+
+    .card-header {
+      background: rgba(10, 14, 26, 0.5);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid $border-glass;
+
+      .window-controls {
+        display: flex;
+        gap: 6px;
+        .w-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          &.close { background: rgba(239, 68, 68, 0.4); }
+          &.minimize { background: rgba(245, 158, 11, 0.4); }
+          &.maximize { background: rgba(16, 185, 129, 0.4); }
+        }
+      }
+
+      .card-tag {
+        font-family: monospace;
+        font-size: 0.8rem;
+        color: $text-dim;
+      }
+    }
+
+    .card-body {
+      padding: 40px;
+      
+      @media (max-width: 480px) {
+        padding: 24px;
+      }
+    }
+  }
+
+  // Interactive Form Elements
+  .secure-matrix-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .form-input-node {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      label {
+        font-family: monospace;
+        font-size: 0.85rem;
+        color: $text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+
+        .label-decorator {
+          color: $accent-neon-cyan;
+        }
+      }
+
+      .input-glass-container {
+        position: relative;
+        border-radius: 8px;
+        background: #050811;
+
+        input {
+          width: 100%;
+          background: transparent;
+          border: 1px solid $border-glass;
+          border-radius: 8px;
+          padding: 14px 18px;
+          color: white;
+          font-size: 1rem;
+          position: relative;
+          z-index: 2;
+          transition: border-color 0.3s;
+
+          &:focus {
+            outline: none;
+            border-color: $accent-neon-cyan;
+            
+            & + .input-focus-glow {
+              opacity: 1;
+            }
+          }
+        }
+
+        .input-focus-glow {
+          position: absolute;
+          top: 0; left: 0; right: 0; bottom: 0;
+          border-radius: 8px;
+          box-shadow: 0 0 14px rgba($accent-neon-cyan, 0.2);
+          opacity: 0;
+          pointer-events: none;
+          transition: opacity 0.3s ease;
+          z-index: 1;
+        }
+      }
+    }
+
+    .btn-execute-auth {
+      width: 100%;
+      background: linear-gradient(90deg, #e11d48 0%, #be123c 100%);
+      border: none;
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(225, 29, 72, 0.25);
+      transition: transform 0.2s, box-shadow 0.2s;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 24px rgba(225, 29, 72, 0.4);
+      }
+
+      &:active {
+        transform: translateY(1px);
+      }
+    }
+  }
+
+  .console-text {
+    font-family: monospace;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: $text-dim;
+    margin: 0;
+    
+    strong {
+      color: $accent-magenta-warn;
+    }
+  }
+}
+
+// Critical Security Pulse Animations
+@keyframes pulseSecurity {
+  0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(244, 63, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
+}

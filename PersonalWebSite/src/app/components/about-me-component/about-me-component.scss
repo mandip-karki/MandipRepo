@@ -1,0 +1,303 @@
+// Premium Dark Dashboard Architecture Tokens
+$bg-main: #060913;
+$bg-surface: #0E1326;
+$bg-glass: rgba(14, 19, 38, 0.7);
+$accent-neon-cyan: #00f0ff;
+$accent-electric-blue: #2563eb;
+$text-primary: #f8fafc;
+$text-secondary: #cbd5e1;
+$text-dim: #64748b;
+$border-glass: rgba(36, 50, 79, 0.5);
+
+.dashboard-viewport {
+  background-color: $bg-main;
+  color: $text-primary;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  font-family: 'SF Pro Display', -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+  letter-spacing: -0.01em;
+
+  @media (max-width: 960px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Left Sidebar Layout
+.system-sidebar {
+  background: linear-gradient(180deg, #0a0e1e 0%, #05070f 100%);
+  border-right: 1px solid $border-glass;
+  padding: 60px 40px;
+  position: relative;
+
+  .sidebar-sticky-content {
+    position: sticky;
+    top: 60px;
+    height: calc(100vh - 120px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background-color: $accent-neon-cyan;
+      border-radius: 50%;
+      box-shadow: 0 0 12px $accent-neon-cyan;
+      animation: pulse 2s infinite;
+    }
+    .status-text {
+      font-family: monospace;
+      font-size: 0.75rem;
+      color: $accent-neon-cyan;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  .dev-name {
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    margin: 0 0 10px 0;
+    background: linear-gradient(135deg, #ffffff 30%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .dev-title {
+    color: $text-secondary;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin: 0 0 15px 0;
+  }
+
+  .dev-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: $text-dim;
+    font-size: 0.9rem;
+    font-family: monospace;
+  }
+
+  // Identity Button Interface
+  .btn-modern-gateway {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid $border-glass;
+    color: $text-primary;
+    text-decoration: none;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+    &:hover {
+      border-color: $accent-neon-cyan;
+      box-shadow: 0 0 20px rgba($accent-neon-cyan, 0.15);
+      transform: translateY(-2px);
+      
+      .btn-icon {
+        color: $accent-neon-cyan;
+        transform: translateX(4px);
+      }
+    }
+
+    .btn-icon {
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+      color: $text-dim;
+    }
+  }
+}
+
+// Right Main Deck Area
+.dashboard-deck {
+  padding: 60px 80px;
+  max-width: 1200px;
+  overflow-y: auto;
+
+  @media (max-width: 1200px) {
+    padding: 40px;
+  }
+
+  // Modern Control Terminal Deck Cards
+  .deck-card {
+    background: $bg-glass;
+    backdrop-filter: blur(20px);
+    border: 1px solid $border-glass;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+
+    .card-header {
+      background: rgba(10, 14, 26, 0.5);
+      padding: 16px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid $border-glass;
+
+      .window-controls {
+        display: flex;
+        gap: 6px;
+        .w-dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          &.close { background: rgba(239, 68, 68, 0.4); }
+          &.minimize { background: rgba(245, 158, 11, 0.4); }
+          &.maximize { background: rgba(16, 185, 129, 0.4); }
+        }
+      }
+
+      .card-tag {
+        font-family: monospace;
+        font-size: 0.8rem;
+        color: $text-dim;
+      }
+    }
+
+    .card-body {
+      padding: 32px;
+    }
+  }
+
+  .summary-paragraph {
+    font-size: 1.25rem;
+    line-height: 1.75;
+    color: $text-secondary;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  // Metrics Dashboard Columns
+  .metrics-container-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-bottom: 30px;
+
+    .metric-glass-card {
+      background: linear-gradient(135deg, rgba(14,19,38,0.6) 0%, rgba(10,14,26,0.8) 100%);
+      border: 1px solid $border-glass;
+      border-radius: 16px;
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+
+      &:hover {
+        border-color: rgba($accent-neon-cyan, 0.4);
+        transform: translateY(-4px);
+        
+        .card-glow {
+          opacity: 0.1;
+        }
+      }
+
+      .card-glow {
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at 80% 20%, $accent-neon-cyan 0%, transparent 50%);
+        opacity: 0;
+        transition: opacity 0.5s ease;
+        pointer-events: none;
+      }
+
+      .metric-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+
+        .metric-value {
+          font-size: 2.75rem;
+          font-weight: 800;
+          font-family: monospace;
+          color: $accent-neon-cyan;
+          line-height: 1;
+        }
+
+        .metric-label {
+          font-size: 1rem;
+          font-weight: 600;
+          color: $text-primary;
+          margin-top: 8px;
+        }
+      }
+
+      .metric-details {
+        font-size: 0.9rem;
+        color: $text-dim;
+        line-height: 1.5;
+        margin: 0;
+      }
+    }
+  }
+
+  // System Capability Nodes
+  .skills-flex-matrix {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+
+    .node-title {
+      font-size: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: $text-dim;
+      margin: 0 0 15px 0;
+      font-family: monospace;
+    }
+
+    .pill-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .tech-pill {
+      background: #12182d;
+      border: 1px solid rgba(255,255,255,0.05);
+      color: $text-secondary;
+      padding: 10px 18px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba($accent-electric-blue, 0.2);
+        border-color: $accent-electric-blue;
+        color: white;
+        transform: scale(1.03);
+      }
+
+      .pill-decorator {
+        color: $accent-neon-cyan;
+        margin-right: 4px;
+        font-family: monospace;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+// Animations Tokens
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(0, 240, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 240, 255, 0); }
+}
