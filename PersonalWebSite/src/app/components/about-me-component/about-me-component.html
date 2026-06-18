@@ -1,7 +1,5 @@
-<!-- Main Application Container -->
 <div class="dashboard-viewport">
   
-  <!-- Left Side System Panel (Fixed/Sticky Sidebar) -->
   <aside class="system-sidebar">
     <div class="sidebar-sticky-content">
       <div class="identity-card">
@@ -17,7 +15,6 @@
         </p>
       </div>
 
-      <!-- Secure Control Node (Login Button Redirect) -->
       <div class="gateway-node">
         <a routerLink="/login" class="btn-modern-gateway">
           <span class="btn-text">Initialize Identity Gateway</span>
@@ -29,10 +26,8 @@
     </div>
   </aside>
 
-  <!-- Right Side Interactive Grid Layer (Scrollable Deck) -->
   <main class="dashboard-deck">
     
-    <!-- Profile Executive Summary Card -->
     <section class="deck-card summary-card">
       <div class="card-header">
         <div class="window-controls">
@@ -45,19 +40,19 @@
       </div>
     </section>
 
-    <!-- Metrics Matrix Grid -->
     <section class="metrics-container-grid">
       <div class="metric-glass-card" *ngFor="let item of metrics">
         <div class="card-glow"></div>
-        <div class="metric-header">
-          <span class="metric-value">{{ item.value }}</span>
-          <span class="metric-label">{{ item.metric }}</span>
+        <div class="metric-content">
+          <div class="metric-header">
+            <span class="metric-value">{{ item.value }}</span>
+            <span class="metric-label">{{ item.metric }}</span>
+          </div>
+          <p class="metric-details">{{ item.description }}</p>
         </div>
-        <p class="metric-details">{{ item.description }}</p>
       </div>
     </section>
 
-    <!-- Systems Capability Grid -->
     <section class="deck-card capabilities-card">
       <div class="card-header">
         <div class="window-controls">
