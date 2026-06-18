@@ -1,8 +1,6 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { CSharpApiService } from '../../services/c-sharp-api.service';
 
 interface AboutMe {
@@ -27,7 +25,7 @@ interface PerformanceMetric {
   templateUrl: './about-me-component.html',
   styleUrls: ['./about-me-component.scss']
 })
-export class AboutMeComponent implements OnInit, OnDestroy {
+export class AboutMeComponent implements OnInit {
   name: string = 'M KARKI';
   title: string = 'Senior Full Stack Software Developer';
   location: string = 'Brampton, ON';
@@ -67,33 +65,17 @@ export class AboutMeComponent implements OnInit, OnDestroy {
     }
   ];
 
-  profileData?: AboutMe;
-  private destroy$ = new Subject<void>();
-
   constructor(private cSharpApiService: CSharpApiService, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.cSharpApiService.getAboutMe()
-      .pipe(takeUntil(this.destroy$)) // Automatically unsubscribes when component is destroyed
-      .subscribe({
-        next: (data: AboutMe) => {
-          console.log('Raw API Stream Data arrived:', data); // <-- Add this log
-          // 2. Capture the data from the API response
-          this.profileData = data;
-          this.name = data?.name ?? this.name;
-          // In case the HTTP callback executed outside Angular's change detection,
-          // ensure the view is updated.
-          try { this.cdr.detectChanges(); } catch (e) { /* noop */ }
-        },
-        error: (err) => {
-          console.error('API Call Failed:', err);
-        }
-      });
-   }
-
-   ngOnDestroy(): void {
-    // Triggers the unsubscription flow
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.cSharpApiService.getAboutMe().subscribe({
+      next: (data: AboutMe) => {
+        this.name = data.name || this.name;
+        try { this.cdr.detectChanges(); } catch (e) { /* noop */ }
+      },
+      error: (err) => {
+        console.error('API Call Failed:', err);
+      }
+    });
   }
 }

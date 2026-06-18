@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
-import { tap, mapTo } from 'rxjs/operators';
 
 export interface AppRuntimeConfig {
   services: {
@@ -17,13 +16,8 @@ export class RuntimeConfigService {
 
   constructor(private http: HttpClient) {}
 
-  load(): Promise<void> {
-    return firstValueFrom(
-      this.http.get<AppRuntimeConfig>('/api-endpoints.json').pipe(
-        tap((config) => this.config = config),
-        mapTo(void 0)
-      )
-    );
+  async load(): Promise<void> {
+    this.config = await firstValueFrom(this.http.get<AppRuntimeConfig>('/api-endpoints.json'));
   }
 
   get apiBaseUrl(): string {
