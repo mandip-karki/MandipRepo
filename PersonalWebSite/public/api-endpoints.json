@@ -1,0 +1,5 @@
+{
+  "services": {
+    "local": "http://localhost:82"
+  }
+}
